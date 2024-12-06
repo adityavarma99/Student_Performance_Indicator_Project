@@ -26,4 +26,4 @@ class CustomException(Exception):
     except Exception as e:
         logging.info("Divide by zero")
         raise CustomException(e,sys)
-        
+        """
