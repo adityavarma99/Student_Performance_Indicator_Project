@@ -41,10 +41,12 @@ class ModelTrainer:
                 "Random Forest": RandomForestRegressor(),
                 "Decision Tree": DecisionTreeRegressor(),
                 "Gradient Boosting": GradientBoostingRegressor(),
-                "Linear Regression": LinearRegression(),
+                #"Linear Regression": LinearRegression(),
                 "XGBRegressor": XGBRegressor(),
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
+
+            #logging.info(f"best model: {models}")
 
             params={
                 "Decision Tree": {
@@ -66,7 +68,7 @@ class ModelTrainer:
                     # 'max_features':['auto','sqrt','log2'],
                     'n_estimators': [8,16,32,64,128,256]
                 },
-                "Linear Regression":{},
+                #"Linear Regression":{},
                 "XGBRegressor":{
                     'learning_rate':[.1,.01,.05,.001],
                     'n_estimators': [8,16,32,64,128,256]
@@ -79,6 +81,8 @@ class ModelTrainer:
                 
             }
 
+            #logging.info(f"best params: {params}")
+
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,models=models,param=params)
             
             # to get the best model score from dict
@@ -90,6 +94,15 @@ class ModelTrainer:
             ]
             
             best_model = models[best_model_name]
+
+            # Log the best model and its parameters
+            logging.info(f"Best Model Found: {best_model_name}")
+
+            # Extract actual parameters after training
+            actual_parameters = best_model.get_params()  # Retrieve parameters of the best model
+            logging.info(f"Best Model Actual Parameters: {actual_parameters}")
+            
+            logging.info(f"Best Model R2 Score: {best_model_score}")
 
             if best_model_score<0.6:
                 raise CustomException("No best model found")
