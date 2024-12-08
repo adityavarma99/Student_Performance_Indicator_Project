@@ -68,7 +68,7 @@ class DataTransformation:
             raise CustomException
             
 
-    def initiate_data_transformation(self,train_path,test_path):
+    def initiate_data_transformation(self,train_path,test_path):     ## we are getting train_path and test_path from data ingestion
 
         try:
              train_df=pd.read_csv(train_path)
