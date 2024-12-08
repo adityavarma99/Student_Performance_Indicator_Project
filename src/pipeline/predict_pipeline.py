@@ -13,10 +13,14 @@ class PredictPipeline:
         try: 
             model_path=os.path.join("artifacts","model.pkl")
             preprocessor_path= os.path.join("artifacts","preprocessor.pkl") # preprocessor_path is responsible for handling categorical features for doing feature scaling
+            
             print("Before Loading")
+            
             model=load_object(file_path=model_path)                         # to load the data, writing the function in utils.py
             preprocessor=load_object(file_path=preprocessor_path)
+            
             print("After Loading")
+            
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
             

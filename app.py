@@ -21,7 +21,7 @@ def predict_datapoint():                                       # calling the fuc
     if request.method=='GET':
         return render_template('home.html')
     else:
-        data=CustomData(
+        data=CustomData(                                                   # fucntion custom data is written in predict pipeline.py
             gender=request.form.get('gender'),
             race_ethnicity=request.form.get('ethnicity'),
             parental_level_of_education=request.form.get('parental_level_of_education'),
@@ -34,7 +34,7 @@ def predict_datapoint():                                       # calling the fuc
         pred_df=data.get_data_as_data_frame()
         print(pred_df)
 
-        predict_pipeline=PredictPipeline()
+        predict_pipeline=PredictPipeline()                              # fucntion predict pipeline is written in predict pipeline.py
         results=predict_pipeline.predict(pred_df)
 
         return render_template('home.html',results=results[0])            # results is printed from home.html
