@@ -26,19 +26,19 @@ def save_object(file_path, obj):
         raise CustomException(e,sys)
     
 # evaluate models is from model trainer
-def evaluate_models(X_train, y_train, X_test, y_test, models):
+def evaluate_models(X_train, y_train, X_test, y_test, models,param):
     try:
         report = {}
 
         for i in range(len(list(models))):              # go through each and every model
             model=list(models.values())[i]
 
-            #para=param[list(models.keys())[i]]
+            ## go through each parameter and do grid search Validation
+            para=param[list(models.keys())[i]]
+            gs = GridSearchCV(model,para,cv=3)
+            gs.fit(X_train,y_train)                         ## fit X train and y train with grid search for hyper parameter tunning
+            model.set_params(**gs.best_params_)
 
-            #gs = GridSearchCV(model,para,cv=3)
-            #gs.fit(X_train,y_train)                         ## fit X train and y train with grid search for hyper parameter tunning
-
-            #model.set_params(**gs.best_params_)
 
             model.fit(X_train, y_train)                  # train the model of X_train and y_train
 
