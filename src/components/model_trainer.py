@@ -30,7 +30,7 @@ class ModelTrainer:
     def initiate_model_trainer(self,train_array,test_array):
         try:
             logging.info("Split training and test input data")
-            ## DIviving train and test data
+            ## Dividing train and test data
             X_train,y_train,X_test,y_test=(
                 train_array[:,:-1],
                 train_array[:,-1],
@@ -46,7 +46,6 @@ class ModelTrainer:
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
 
-            #logging.info(f"best model: {models}")
 
             params={
                 "Decision Tree": {
@@ -81,7 +80,6 @@ class ModelTrainer:
                 
             }
 
-            #logging.info(f"best params: {params}")
 
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,models=models,param=params)
             
@@ -101,7 +99,7 @@ class ModelTrainer:
             # Extract actual parameters after training
             actual_parameters = best_model.get_params()  # Retrieve parameters of the best model
             logging.info(f"Best Model Actual Parameters: {actual_parameters}")
-            
+
             logging.info(f"Best Model R2 Score: {best_model_score}")
 
             if best_model_score<0.6:
