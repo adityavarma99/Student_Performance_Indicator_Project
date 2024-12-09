@@ -40,6 +40,6 @@ def predict_datapoint():                                       # calling the fuc
         return render_template('home.html',results=results[0])            # results is printed from home.html
     
 if __name__=="__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0",port=5000)
 
 
